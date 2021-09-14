@@ -1,0 +1,20 @@
+# Ambiente de desenvolvimento
+
+MONGODB_URI=mongodb+srv://user01AIDUP:885522@aidup.or0ro.mongodb.net/CIM?retryWrites=true&w=majority
+     
+
+PUBLICKEY=public_+hB40s/S9YExGhUnrP6lqyWo16Q=
+PRIVATEKEY=private_NXH5tlpCiAYoPOzICzZvdk8US68=
+URL_ENDPOINT=https://ik.imagekit.io/cimrda
+IMAGEKITID=cimrda
+
+#Auth
+
+SECRETKEY=secretKey.CIM-RedeDeCuidado
+
+# a variável MODO pode ter prod ou teste
+PATH_FOLDER_VOLUNTEERS=/VOLUNTEERS
+PATH_FOLDER_ADMINISTRATORS=/ADMINISTRATORS
+PATH_FOLDER=/teste
+SECRETKEY=secretKey.CIM-RedeDeCuidado
+AMBIENTE=DESENVOLVIMENTO
