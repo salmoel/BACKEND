@@ -7,6 +7,7 @@ import {
   Post,
   Put,
   Query,
+  Req,
   UploadedFiles,
   UseGuards,
   UseInterceptors,
@@ -58,7 +59,7 @@ export class VolunteersController {
       [
         { name: 'imgFilePrincipal', maxCount: 1 },
         { name: 'imgFileCasaDescansoPrincipal', maxCount: 1 },
-        { name: 'imgsCasaDescansoFile', maxCount: 10 },
+        { name: 'imgsCasaDescansoFile', maxCount: 20 },
       ],
       {
         storage: diskStorage({
@@ -73,6 +74,7 @@ export class VolunteersController {
     @Body() voluntary: Voluntary,
     @UploadedFiles() files
   ): Promise<Voluntary> {
+    
     let urlsImageLocal
     // serviço que controla o upload das imagens para o imagekit
     // o trabalho dela é pegar os arquivos que vieram na requisiçção, fazer o upload e retornar as urls para montagem do novo objeto

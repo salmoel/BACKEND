@@ -9,7 +9,9 @@ import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
     imports: [
-        MongooseModule.forFeature([{ name: 'Administrator', schema: AdministratorsSchema }]),
+        MongooseModule.forFeature([
+            { name: 'Administrator', schema: AdministratorsSchema }
+        ]),
         forwardRef(() => AuthModule)
     ],
     
