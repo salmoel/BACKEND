@@ -27,25 +27,26 @@ import { query } from 'express';
 export class VolunteersController {
   constructor(
     private readonly volunteersService: VolunteersService,
-    private readonly uploadImagesVolunteersService: UploadImagesVolunteersService,
-  ) { }
+    private readonly uploadImagesVolunteersService: UploadImagesVolunteersService
+  ) {}
 
   @UseGuards(JwtAuthGuard)
   @Get()
   async getAll(): Promise<Voluntary[]> {
     return this.volunteersService.getAll();
   }
-  
+
   //  consulta voluntario
-    @UseGuards(JwtAuthGuard)
-    @Get('/voluntary')
-    async getConsulta(@Query() termoBusca: string): Promise<Voluntary[]> {
-      console.log(termoBusca)
-      this.volunteersService.findName(termoBusca).then(resultado => console.log(resultado)
-      )
-      
-      return this.volunteersService.findName(termoBusca)
-    }
+  @UseGuards(JwtAuthGuard)
+  @Get('/voluntary')
+  async getConsulta(@Query() termoBusca: string): Promise<Voluntary[]> {
+    console.log(termoBusca);
+    this.volunteersService
+      .findName(termoBusca)
+      .then((resultado) => console.log(resultado));
+
+    return this.volunteersService.findName(termoBusca);
+  }
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
@@ -74,20 +75,20 @@ export class VolunteersController {
     @Body() voluntary: Voluntary,
     @UploadedFiles() files
   ): Promise<Voluntary> {
-    
-    let urlsImageLocal
+    let urlsImageLocal;
     // serviço que controla o upload das imagens para o imagekit
     // o trabalho dela é pegar os arquivos que vieram na requisiçção, fazer o upload e retornar as urls para montagem do novo objeto
     urlsImageLocal = this.uploadImagesVolunteersService.upload(
       files.imgFilePrincipal,
       files.imgFileCasaDescansoPrincipal,
-      files.imgsCasaDescansoFile,
-    )
+      files.imgsCasaDescansoFile
+    );
 
     // console.log("novo objeto criado com as urls das imagens UPLOIDADAS :: ", urlsImageLocal);
 
-
-    var voluntaryNew: Voluntary = Object.assign(voluntary, { urlsImage: urlsImageLocal }); // gardando as novas urls das imagens já uploidadas no objeto de voluntário
+    var voluntaryNew: Voluntary = Object.assign(voluntary, {
+      urlsImage: urlsImageLocal,
+    }); // gardando as novas urls das imagens já uploidadas no objeto de voluntário
     // console.log(voluntaryNew);
     const isCreated = await this.volunteersService.create(voluntaryNew);
     if (isCreated) {
@@ -99,7 +100,7 @@ export class VolunteersController {
         delete files[prop];
       }
     }
-    return isCreated
+    return isCreated;
   }
   @UseGuards(JwtAuthGuard)
   @Put(':id')
@@ -126,7 +127,6 @@ export class VolunteersController {
   ) {
     //: Promise<Voluntary>
 
-
     // console.log(id);
     // console.log('================');
     //  console.log(voluntary);
@@ -135,33 +135,47 @@ export class VolunteersController {
 
     if (objectIsEmpty(files)) {
       console.log('Sem arquivos para atualizar');
-      return this.volunteersService.update(id, voluntary);// função que atualiza o vluntario no banco 
+      return this.volunteersService.update(id, voluntary); // função que atualiza o vluntario no banco
     } else {
-      let urlsImageLocal
-      console.log("com arquivos para atualizar");
+      let urlsImageLocal;
+      console.log('com arquivos para atualizar');
 
       this.uploadImagesVolunteersService.deletionSettings(id); // Realiza as configurações para deleção e chama a função que deleta no imagekit
 
-      urlsImageLocal = this.uploadImagesVolunteersService.upload(  // serviço que controla o upload das imagens para o imagekit  o trabalho dela é pegar os arquivos que vieram na requisiçção, fazer o upload e retornar as urls para montagem do novo objeto
+      urlsImageLocal = this.uploadImagesVolunteersService.upload(
+        // serviço que controla o upload das imagens para o imagekit  o trabalho dela é pegar os arquivos que vieram na requisiçção, fazer o upload e retornar as urls para montagem do novo objeto
         files.imgFilePrincipal,
         files.imgFileCasaDescansoPrincipal,
-        files.imgsCasaDescansoFile,
+        files.imgsCasaDescansoFile
         // this.urlsImage
-      )
+      );
 
       // console.log("novo objeto criado com as urls das imagens UPLOIDADAS :: ", urlsImageLocal);
 
-
-      var voluntaryNew: Voluntary = Object.assign(voluntary, { urlsImage: urlsImageLocal }); // gardando as novas urls das imagens já uploidadas no objeto de voluntário
+      var voluntaryNew: Voluntary = Object.assign(voluntary, {
+        urlsImage: urlsImageLocal,
+      }); // gardando as novas urls das imagens já uploidadas no objeto de voluntário
       // console.log("dados que estão sendo atualizdo no banco",voluntaryNew);
       return await this.volunteersService.update(id, voluntaryNew);
     }
     // return this.volunteersService.update(id, voluntary);
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Put([':id', ':status'])
+  async updateStatusVoluntary(
+    @Param('id') id: string,
+    @Param('status') status: string
+  ) {
+    console.log(`id recebido ${id}`)
+    console.log(`status recebido ${status}`)
+
+    return await this.volunteersService.updateStatus(id, status);
+  }
+
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async Delete(@Param('id') id: string) {
     return this.volunteersService.delete(id);
   }
-
 }

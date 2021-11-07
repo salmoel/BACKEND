@@ -1,5 +1,6 @@
 require('dotenv').config({
-  path: process.env.NODE_ENV === "Developement" ? "dev.env" : "PRODUCTION.env"
+  // path: process.env.NODE_ENV =  ".PRODUCTION.env" 
+  path: process.env.NODE_ENV =  ".DEVELOPMENT.env" 
 })
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -14,13 +15,14 @@ import { VolunteersModule } from './Volunteers/Volunteers.module';
 
 @Module({
   imports: [
+
     MongooseModule.forRoot(
        process.env.MONGODB_URI,
       { 
         useNewUrlParser: true,
         useUnifiedTopology: true, 
-        // connectionName: 'DataProd'
       }),
+      
         MulterModule.register({
           dest: './src/img',
         }),
