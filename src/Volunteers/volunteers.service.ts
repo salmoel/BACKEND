@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcryptjs';
+import { Console } from 'console';
 import { Model } from 'mongoose';
 import { Voluntary } from '../shared/voluntary';
 
@@ -43,7 +44,10 @@ export class VolunteersService {
     return await this.voluntaryModel.find({ campo: termocustom });
   }
   async updateStatus(id: string, status: string) {
-    await this.voluntaryModel.findByIdAndUpdate(id, { status: status }).exec();
+    console.log('MUDOU STATUS');
+    
+    await this.voluntaryModel.findByIdAndUpdate({_id:id}, { $set: { status: status  }}).exec();
+
   }
 
   async getByEmail(email: string): Promise<Voluntary | undefined> {

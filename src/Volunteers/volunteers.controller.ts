@@ -103,6 +103,15 @@ export class VolunteersController {
     return isCreated;
   }
   @UseGuards(JwtAuthGuard)
+  @Put('status/:id')
+  async updateStatusVoluntary(
+    @Param('id') id: string,
+    @Query() status: string
+  ) {
+   return await this.volunteersService.updateStatus(id, status['status']);
+   }
+
+  @UseGuards(JwtAuthGuard)
   @Put(':id')
   @UseInterceptors(
     FileFieldsInterceptor(
@@ -159,18 +168,6 @@ export class VolunteersController {
       return await this.volunteersService.update(id, voluntaryNew);
     }
     // return this.volunteersService.update(id, voluntary);
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @Put([':id', ':status'])
-  async updateStatusVoluntary(
-    @Param('id') id: string,
-    @Param('status') status: string
-  ) {
-    console.log(`id recebido ${id}`)
-    console.log(`status recebido ${status}`)
-
-    return await this.volunteersService.updateStatus(id, status);
   }
 
   @UseGuards(JwtAuthGuard)
