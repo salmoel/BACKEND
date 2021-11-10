@@ -1,8 +1,8 @@
 {
   "name": "api-rda",
   "engines": {
-    "node": ">=16.13.0",
-    "npm": ">=8.1.10"
+    "node": "16.13.0",
+    "npm": "8.1.10"
   },
   "version": "0.0.1",
   "description": "",
