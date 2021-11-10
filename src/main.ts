@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import * as ImageKit from 'imagekit'
-//var ImageKit = require("imagekit");
+// import * as ImageKit from 'imagekit'
+var ImageKit = require("imagekit");
 //const fileUpload = require('express-fileupload');
 
 
