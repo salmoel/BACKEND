@@ -78,7 +78,7 @@ export class VolunteersController {
     let urlsImageLocal;
     // serviço que controla o upload das imagens para o imagekit
     // o trabalho dela é pegar os arquivos que vieram na requisiçção, fazer o upload e retornar as urls para montagem do novo objeto
-    urlsImageLocal = this.uploadImagesVolunteersService.upload(
+    urlsImageLocal = await this.uploadImagesVolunteersService.upload(
       files.imgFilePrincipal,
       files.imgFileCasaDescansoPrincipal,
       files.imgsCasaDescansoFile
@@ -144,14 +144,14 @@ export class VolunteersController {
 
     if (objectIsEmpty(files)) {
       console.log('Sem arquivos para atualizar');
-      return this.volunteersService.update(id, voluntary); // função que atualiza o vluntario no banco
+      return await this.volunteersService.update(id, voluntary); // função que atualiza o vluntario no banco
     } else {
       let urlsImageLocal;
       console.log('com arquivos para atualizar');
 
-      this.uploadImagesVolunteersService.deletionSettings(id); // Realiza as configurações para deleção e chama a função que deleta no imagekit
+      await this.uploadImagesVolunteersService.deletionSettings(id); // Realiza as configurações para deleção e chama a função que deleta no imagekit
 
-      urlsImageLocal = this.uploadImagesVolunteersService.upload(
+      urlsImageLocal = await this.uploadImagesVolunteersService.upload(
         // serviço que controla o upload das imagens para o imagekit  o trabalho dela é pegar os arquivos que vieram na requisiçção, fazer o upload e retornar as urls para montagem do novo objeto
         files.imgFilePrincipal,
         files.imgFileCasaDescansoPrincipal,
