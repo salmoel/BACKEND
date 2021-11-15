@@ -52,7 +52,7 @@ export class UploadImagesVolunteersService {
     }
     if (imgsCasaDescansoFile) {
       console.log("subindo as imgsCasaDescansoFile");
-      let varUlImgsCasaDescanso = ['']
+      let varUlImgsCasaDescanso = []
 
       // se o campo com as imagens da casadescanso estiver com valor entra
       imgsCasaDescansoFile.forEach(function (item: any, index: any) {
