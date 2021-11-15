@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { UrlImage } from 'src/shared/urlImage';
 import {
   getFileImagAndDelet,
   getUrl,
@@ -8,11 +9,14 @@ import { VolunteersService } from './volunteers.service';
 
 @Injectable()
 export class UploadImagesVolunteersService {
+  urlImage = new Object()
   urlsImage: any = {
     urlImgPrincipal: '',
     urlImgCasaDescansoPrincipal: '',
-    urlImgsCasaDescanso: [],
-  };
+    urlImgsCasaDescanso: []
+
+  }; 
+  
   constructor(private readonly volunteersService: VolunteersService) {}
  
   public upload(
@@ -20,49 +24,50 @@ export class UploadImagesVolunteersService {
     imgFileCasaDescansoPrincipal: any[],
     imgsCasaDescansoFile: any[], 
   ) {
-    let UrlsImageVar
-    UrlsImageVar = []
-    UrlsImageVar = this.urlsImage
+
+    // console.debug(imgFilePrincipal)
+    // console.debug(imgFileCasaDescansoPrincipal)
+    // console.debug(imgsCasaDescansoFile)
+   
+
     // const pathFolder = '/teste'
     const pathFolder = process.env.PATH_FOLDER_VOLUNTEERS
 
     if (imgFilePrincipal) {
-      console.log("entrou no imgFilePrincipal");
-      
+      console.log("Subindo a imgFilePrincipal");
       let item = imgFilePrincipal[0];
-      UrlsImageVar.urlImgPrincipal = getUrl(item.filename, pathFolder);
+      this.urlsImage.urlImgPrincipal = getUrl(item.filename, pathFolder);
       uploadImag(item.path, item.filename, pathFolder);
-
+      
       // urlsImage.imgFilePrincipal = getUrlUploadImageIF(item); // função gera a url e faz upload da imagem, armazenando a url no objeto
     }
     if (imgFileCasaDescansoPrincipal) {
-
+      console.log("Subindo a imgFileCasaDescansoPrincipal");
+      
       let item = imgFileCasaDescansoPrincipal[0];
-      UrlsImageVar.urlImgCasaDescansoPrincipal = getUrl(item.filename, pathFolder);
+      this.urlsImage.urlImgCasaDescansoPrincipal = getUrl(item.filename, pathFolder);
       uploadImag(item.path, item.filename, pathFolder);
 
       // urlsImage.imgFileCasaDescansoPrincipal = getUrlUploadImageIF(item); // função gera a url e faz upload da imagem
     }
     if (imgsCasaDescansoFile) {
-      console.log("entrou no imgsCasaDescansoFile");
+      console.log("subindo as imgsCasaDescansoFile");
+      let varUlImgsCasaDescanso = ['']
 
       // se o campo com as imagens da casadescanso estiver com valor entra
       imgsCasaDescansoFile.forEach(function (item: any, index: any) {
-        UrlsImageVar.urlImgsCasaDescanso[index] = getUrl(
-          item.filename,
-          pathFolder
-          );
+        // this.urlsImage.urlImgsCasaDescanso[index] = getUrl(item.filename,pathFolder);
+        varUlImgsCasaDescanso.push(getUrl(item.filename,pathFolder))
           uploadImag(item.path, item.filename, pathFolder);
           // urlsImage.imgsCasaDescansoFile[index] = getUrlUploadImageIF(item); // função gera a url e faz upload da imagem
         });
-
+        this.urlsImage.urlImgsCasaDescanso = varUlImgsCasaDescanso
     }
 
-    return UrlsImageVar
+    return this.urlsImage
   }
 
   public async deletionSettings(id: string) {
-   
     
     let volunteerUpdateImage;
     let listUrlsOfTheImagesToBeDeleted = [];
@@ -70,7 +75,6 @@ export class UploadImagesVolunteersService {
     
     await this.volunteersService.getById(id).then((voluntary) => {
       volunteerUpdateImage = voluntary.urlsImage;
-
     });
 
     if (volunteerUpdateImage.urlImgsCasaDescanso[0]) {

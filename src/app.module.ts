@@ -1,6 +1,6 @@
 require('dotenv').config({
-  path: process.env.NODE_ENV =  ".PRODUCTION.env" 
-  // path: process.env.NODE_ENV =  ".DEVELOPMENT.env" 
+  // path: process.env.NODE_ENV =  ".PRODUCTION.env" 
+  path: process.env.NODE_ENV =  ".DEVELOPMENT.env" 
 })
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -24,7 +24,7 @@ import { VolunteersModule } from './Volunteers/Volunteers.module';
       }),
       
         MulterModule.register({
-          dest: './src/img',
+     
         }),
         AuthModule,
       ],

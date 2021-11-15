@@ -133,7 +133,7 @@ export class VolunteersController {
     @Param('id') id: string,
     @Body() voluntary: Voluntary,
     @UploadedFiles() files
-  ) {
+  ) :Promise<any>{
     //: Promise<Voluntary>
 
     // console.log(id);

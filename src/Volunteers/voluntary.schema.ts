@@ -1,10 +1,11 @@
 import * as mongoose from 'mongoose';
 
-
+mongoose.Schema.Types.Boolean.convertToFalse.add('');
 export const VoluntarySchema = new mongoose.Schema({
+  // _id: {type: mongoose.Schema.Types.ObjectId},
   nome: String,
   CPF: String,
-  typeUser:String,
+  typeUser: String,
   dataNascimento: String,
   sexo: String,
   endereco: {
@@ -73,7 +74,7 @@ export const VoluntarySchema = new mongoose.Schema({
     custoHospedagem: String,
     valorHospedagem: String,
     alimentacao: Boolean,
- 
+
     valorRefeicoes: String,
     qtQuartos: String,
     qtSuites: String,
@@ -90,31 +91,31 @@ export const VoluntarySchema = new mongoose.Schema({
         geladeira: Boolean,
         fogao: Boolean,
         microOndas: Boolean,
-        mesaJantar:Boolean,
-        itensBasicos:Boolean,
-        utensiliosBasicos:Boolean,
-        outrosCozinha:String,
+        mesaJantar: Boolean,
+        itensBasicos: Boolean,
+        utensiliosBasicos: Boolean,
+        outrosCozinha: String,
       },
-      banheiros:{
-        roupaBanho:Boolean,
-        itensBasicosHigiene:Boolean,
-        itensBasicosBeleza:Boolean,
-        outrosBanheiro:String,
+      banheiros: {
+        roupaBanho: Boolean,
+        itensBasicosHigiene: Boolean,
+        itensBasicosBeleza: Boolean,
+        outrosBanheiro: String,
       },
-      salaEstar:{
+      salaEstar: {
         TV: Boolean,
         internet: Boolean,
-        sofa:Boolean,
-        outrosSalaEstar:String,
+        sofa: Boolean,
+        outrosSalaEstar: String,
       },
-      areaExterna:{
+      areaExterna: {
         garagem: Boolean,
         piscina: Boolean,
-        churasqueira:Boolean,
+        churasqueira: Boolean,
         quadra: Boolean,
-        jogos:Boolean,
+        jogos: Boolean,
         restaurantes: Boolean,
-        outrosareaExeterna:String,
+        outrosareaExeterna: String,
       },
       outrosServicosOferecidos: Boolean,
       outrosServicosOferecidosDescrito: String,
