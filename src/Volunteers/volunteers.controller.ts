@@ -66,7 +66,7 @@ export class VolunteersController {
         storage: diskStorage({
           filename: editFileName,
         }),
-        limits: { fileSize: 350000 },
+        limits: { fileSize: 17301504 },
         fileFilter: imageFileFilter,
       }
     )
@@ -124,7 +124,7 @@ export class VolunteersController {
         storage: diskStorage({
           filename: editFileName,
         }),
-        limits: { fileSize: 350000 },
+        limits: { fileSize: 17301504 },
         fileFilter: imageFileFilter,
       }
     )
