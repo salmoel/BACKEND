@@ -32,13 +32,30 @@ export const VoluntarySchema = new mongoose.Schema({
     chekbox4CasaDescanso: Boolean,
   },
   chekbox5Aconselhamento: Boolean,
-  especialidade: String,
+  aconselhamentoBiblico: {
+    seuMinistrioNaIgreja: String,
+    cursoAconselhamentoBiblico: String,
+    ondeCursou: String,
+    anoDeConclusaoCurso: String,
+    experienciaAconselhamentoBiblico: String,
+  },
+  voluntarioProfissao: {
+    especialidade: String,
+    dicasEspecialidade: String,
+    servicoOferecido: String,
+    servicoOferecidoOutros: String,
+  },
+  voluntarioIntercessor:{
+    ministerioNaIgreja: String,
+    habilidadesWhatsapp: String,
+  },
+
   urlsImage: {
     urlImgPrincipal: String,
     urlImgCasaDescansoPrincipal: String,
     urlImgsCasaDescanso: [],
   },
-  servicoOferecido: String,
+
   dataCad: String,
   status: String,
   localDescanso: {
@@ -73,7 +90,7 @@ export const VoluntarySchema = new mongoose.Schema({
     qtFamiliaMes: String,
     custoHospedagem: String,
     valorHospedagem: String,
-    alimentacao: Boolean,
+    alimentacao: String,
 
     valorRefeicoes: String,
     qtQuartos: String,

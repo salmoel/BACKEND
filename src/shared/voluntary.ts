@@ -31,13 +31,29 @@ export class Voluntary extends Document {
     chekbox4CasaDescanso: boolean;
   };
   chekbox5Aconselhamento: boolean;
-  especialidade: string;
+  aconselhamentoBiblico: {
+    seuMinistrioNaIgreja:string;
+    cursoAconselhamentoBiblico:string;
+    ondeCursou:string;
+    anoDeConclusaoCurso:string;
+    experienciaAconselhamentoBiblico:string; 
+  };
+  voluntarioProfissao:{
+    especialidade: string;
+    dicasEspecialidade:string;
+    servicoOferecido: string;
+    servicoOferecidoOutros: string;
+  };
+  voluntarioIntercessor:{
+    ministerioNaIgreja: string;
+    habilidadesWhatsapp: string;
+   
+  };
   urlsImage: {
     urlImgPrincipal: string;
     urlImgCasaDescansoPrincipal: string;
     urlImgsCasaDescanso: [];
   };
-  servicoOferecido: string;
   dataCad: string;
   status: string;
   localDescanso: {
