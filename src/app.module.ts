@@ -7,11 +7,11 @@ require('dotenv').config({
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MulterModule } from '@nestjs/platform-express';
-import { AdministratorsModule } from './administrators/administrators.module';
+// import { AdministratorsModule } from './administrators/administrators.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { VolunteersModule } from './Volunteers/volunteers.module';
+// import { VolunteersModule } from './Volunteers/volunteers.module';
 
 @Module({
   imports: [
