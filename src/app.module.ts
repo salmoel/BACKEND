@@ -15,9 +15,9 @@ import { VolunteersModule } from './Volunteers/volunteers.module';
 
 @Module({
   imports: [
-    AdministratorsModule,
+    // AdministratorsModule,
     DashboardModule,
-    VolunteersModule,
+    // VolunteersModule,
     MongooseModule.forRoot(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
