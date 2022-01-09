@@ -1,8 +1,16 @@
 import { extname } from 'path';
 
 export const imageFileFilter = (req, file, callback) => {
-  if (!file.originalname.trim().toLowerCase().match(/\.(jpg|jpeg|png|webp|gif)$/)) {
-    return callback(new Error('Somente arquivos de imagem são permitidos!'), false);
+  if (
+    !file.originalname
+      .trim()
+      .toLowerCase()
+      .match(/\.(jpg|jpeg|png|webp|gif)$/)
+  ) {
+    return callback(
+      new Error('Somente arquivos de imagem são permitidos!'),
+      false
+    );
   }
   callback(null, true);
 };
@@ -17,14 +25,37 @@ export const editFileName = (req, file, callback) => {
   callback(null, `${name}-${randomName}${fileExtName}`);
 };
 
-export function nameAdjustment(file): string{
+export function nameAdjustment(file): string {
   const name = file.originalname.split('.')[0];
-  if (name.indexOf('@') > -1) {
-    const withoutarroba = name.replace(/@/g,'')
-    const withoutdashes = withoutarroba.replace(/-/g,'')
-    const nameSemSpace = withoutdashes.replace(/ /g,'')
-    return nameSemSpace
+  let nameEdited = name;
+
+  console.log(`NOME SEM AJUSTE >:: ${nameEdited} ::< ${nameEdited}`);
+
+  if (nameEdited.indexOf('@') > -1) {
+    const withoutarroba = nameEdited.replace(/@/g, '');
+    // console.log(`O Nome editado sem @ ${withoutarroba}`)
+    nameEdited = withoutarroba;
   }
-  return name
+
+  if (nameEdited.indexOf('-') > -1) {
+    const withoutdashes = nameEdited.replace(/-/g, '');
+    // console.log(`O Nome editado sem - ${withoutdashes}`)
+    nameEdited = withoutdashes;
+  }
+
+  if (nameEdited.indexOf(' ') > -1) {
+    const nameWithoutSpace = nameEdited.replace(/ /g, '');
+    // console.log(`O Nome editado sem ESPAÇOS ${nameWithoutSpace}`)
+    nameEdited = nameWithoutSpace;
+  }
+
+  if (nameEdited.indexOf('_') > -1) {
+    const nameWithoutUnderline = nameEdited.replace(/_/g, '');
+    // console.log(`O Nome editado sem _ ${nameWithoutUnderline}`)
+    nameEdited = nameWithoutUnderline;
+    return nameEdited;
+  }
+  console.log(`NOME AJUSTADO >:: ${nameEdited} ::<`);
+
+  return nameEdited;
 }
-  

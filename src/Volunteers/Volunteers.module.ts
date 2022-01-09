@@ -5,7 +5,7 @@ import { VolunteersController } from './volunteers.controller';
 import { VolunteersService } from './volunteers.service';
 import { VoluntarySchema } from './voluntary.schema';
 import { UploadImagesVolunteersService } from './uploadimagesvolunteers.service';
-import { AuthModule } from './../auth/auth.module';
+import { AuthModule } from '../auth/auth.module';
 
 
 @Module({

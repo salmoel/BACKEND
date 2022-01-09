@@ -1,7 +1,7 @@
 import { Document } from 'mongoose';
 
 export class Voluntary extends Document {
-  _id?: string;
+  _id?: string; 
   typeUser: string;
   nome: string;
   CPF: string;

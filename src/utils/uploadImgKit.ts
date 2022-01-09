@@ -13,7 +13,7 @@ export function getUrl(fileName, pathFolder: string) {
 
 export async function uploadImag(path: any, fileName, pathFolder: string) {
   readFile(path, function (err, data) {
-    if (err) throw err; // Fail if the file can't be read.
+    if (err) throw err; 
     imagekit.upload(
       {
         file: data, //required

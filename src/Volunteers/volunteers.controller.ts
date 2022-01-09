@@ -77,14 +77,10 @@ export class VolunteersController {
   ): Promise<Voluntary> {
     let urlsImageLocal;
     // serviço que controla o upload das imagens para o imagekit
-    // o trabalho dela é pegar os arquivos que vieram na requisiçção, fazer o upload e retornar as urls para montagem do novo objeto
-    urlsImageLocal = await this.uploadImagesVolunteersService.upload(
-      files.imgFilePrincipal,
-      files.imgFileCasaDescansoPrincipal,
-      files.imgsCasaDescansoFile
-    );
+    // o trabalho dela é pegar os arquivos que vieram na requisição, fazer o upload e retornar as urls para montagem do novo objeto
+    urlsImageLocal = await this.uploadImagesVolunteersService.upload(files);
 
-    // console.log("novo objeto criado com as urls das imagens UPLOIDADAS :: ", urlsImageLocal);
+     console.log("novo objeto criado com as urls das imagens UPLOIDADAS :: ", urlsImageLocal);
 
     var voluntaryNew: Voluntary = Object.assign(voluntary, {
       urlsImage: urlsImageLocal,
@@ -118,7 +114,7 @@ export class VolunteersController {
       [
         { name: 'imgFilePrincipal', maxCount: 1 },
         { name: 'imgFileCasaDescansoPrincipal', maxCount: 1 },
-        { name: 'imgsCasaDescansoFile', maxCount: 10 },
+        { name: 'imgsCasaDescansoFile', maxCount: 20 },
       ],
       {
         storage: diskStorage({
@@ -134,28 +130,27 @@ export class VolunteersController {
     @Body() voluntary: Voluntary,
     @UploadedFiles() files
   ) :Promise<any>{
-    //: Promise<Voluntary>
-
-    // console.log(id);
-    // console.log('================');
-    //  console.log(voluntary);
-    // console.log('================');
-    // console.log(files);
+    // console.debug(id);
+    // console.debug('================');
+    //  console.debug(voluntary);
+    // console.debug('================');
+    // console.debug(files);
 
     if (objectIsEmpty(files)) {
+
       console.log('Sem arquivos para atualizar');
       return await this.volunteersService.update(id, voluntary); // função que atualiza o vluntario no banco
     } else {
+  
+
       let urlsImageLocal;
       console.log('com arquivos para atualizar');
 
-      await this.uploadImagesVolunteersService.deletionSettings(id); // Realiza as configurações para deleção e chama a função que deleta no imagekit
+      await this.uploadImagesVolunteersService.deletionSettings(id, files); // Realiza as configurações para deleção e chama a função que deleta no imagekit
 
       urlsImageLocal = await this.uploadImagesVolunteersService.upload(
-        // serviço que controla o upload das imagens para o imagekit  o trabalho dela é pegar os arquivos que vieram na requisiçção, fazer o upload e retornar as urls para montagem do novo objeto
-        files.imgFilePrincipal,
-        files.imgFileCasaDescansoPrincipal,
-        files.imgsCasaDescansoFile
+        // serviço que controla o upload das imagens para o imagekit  o trabalho dela é pegar os arquivos que vieram na requisição, fazer o upload e retornar as urls para montagem do novo objeto
+       files, id
         // this.urlsImage
       );
 
