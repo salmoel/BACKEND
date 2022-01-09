@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.strategy';
 import { AdministratorsModule } from './../administrators/administrators.module';
-// import { VolunteersModule } from '../Volunteers/volunteers.module';
+import { VolunteersModule } from '../Volunteers/volunteers.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
@@ -14,7 +14,7 @@ import { AuthController } from './auth.controller';
 @Module({
   imports: [
     AdministratorsModule,
-    // VolunteersModule,
+    VolunteersModule,
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
