@@ -42,7 +42,6 @@ export class UploadImagesVolunteersService {
       let item = imgFilePrincipal[0];
       this.urlsImage.urlImgPrincipal = getUrl(item.filename, pathFolder);
       uploadImag(item.path, item.filename, pathFolder);
-      console.log(":::::::::::: RECEBIDO DO BANCO DE DADOS 1", this.urlsImage.urlImgPrincipal)
       console.log(":::::::::::: id ", id)
 
 
@@ -65,10 +64,10 @@ export class UploadImagesVolunteersService {
       if (requisitionType == 'Put') {
         console.log('é PUT ');
         voluntario = await this.volunteersService.getById(id);
+        this.urlsImage.urlImgCasaDescansoPrincipal = voluntario.urlsImage.urlImgCasaDescansoPrincipal;
       } else {
-        voluntario.urlsImage.urlImgCasaDescansoPrincipal = '';
+        this.urlsImage.urlImgCasaDescansoPrincipal = '';
       }
-      this.urlsImage.urlImgCasaDescansoPrincipal = voluntario.urlsImage.urlImgCasaDescansoPrincipal;
     }
 
     if (imgsCasaDescansoFile) {
@@ -86,10 +85,10 @@ export class UploadImagesVolunteersService {
       if (requisitionType == 'Put') {
         console.log('é PUT ');
         voluntario = await this.volunteersService.getById(id);
+        this.urlsImage.urlImgsCasaDescanso = voluntario.urlsImage.urlImgsCasaDescanso;
       } else {
-        voluntario.urlsImage.urlImgsCasaDescanso = [];
+        this.urlsImage.urlImgsCasaDescanso = [];
       }
-      this.urlsImage.urlImgsCasaDescanso = voluntario.urlsImage.urlImgsCasaDescanso;
     }
 
     return this.urlsImage;

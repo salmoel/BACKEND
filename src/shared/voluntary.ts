@@ -1,7 +1,7 @@
 import { Document } from 'mongoose';
 
 export class Voluntary extends Document {
-  _id?: string; 
+  _id?: string;
   typeUser: string;
   nome: string;
   CPF: string;
@@ -32,22 +32,28 @@ export class Voluntary extends Document {
   };
   chekbox5Aconselhamento: boolean;
   aconselhamentoBiblico: {
-    seuMinistrioNaIgreja:string;
-    cursoAconselhamentoBiblico:string;
-    ondeCursou:string;
-    anoDeConclusaoCurso:string;
-    experienciaAconselhamentoBiblico:string; 
+    seuMinistrioNaIgreja: string;
+    cursoAconselhamentoBiblico: string;
+    ondeCursou: string;
+    anoDeConclusaoCurso: string;
+    experienciaAconselhamentoBiblico: string;
   };
-  voluntarioProfissao:{
+  voluntarioProfissao: {
     especialidade: string;
-    dicasEspecialidade:string;
-    servicoOferecido: string;
-    servicoOferecidoOutros: string;
+    dicasEspecialidade: string;
+    servicoOferecido: {
+      servicoOferecidoAtendimentos: boolean;
+      servicoOferecidoConsultorias: boolean;
+      servicoOferecidoPalestras: boolean;
+      servicoOferecidoGruposDeOrientacaoWhatsapp: boolean;
+      servicoOferecidoEscreverConteudos: boolean;
+      servicoOferecidoOutros: boolean;
+      servicoOferecidoOutrosDescrito: string;
+    };
   };
-  voluntarioIntercessor:{
+  voluntarioIntercessor: {
     ministerioNaIgreja: string;
     habilidadesWhatsapp: string;
-   
   };
   urlsImage: {
     urlImgPrincipal: string;
@@ -105,31 +111,31 @@ export class Voluntary extends Document {
         geladeira: boolean;
         fogao: boolean;
         microOndas: boolean;
-        mesaJantar:boolean;
-        itensBasicos:boolean;
-        utensiliosBasicos:boolean;
-        outrosCozinha:string;
+        mesaJantar: boolean;
+        itensBasicos: boolean;
+        utensiliosBasicos: boolean;
+        outrosCozinha: string;
       };
-      banheiros:{
-        roupaBanho:boolean;
-        itensBasicosHigiene:boolean;
-        itensBasicosBeleza:boolean;
-        outrosBanheiro:string;
+      banheiros: {
+        roupaBanho: boolean;
+        itensBasicosHigiene: boolean;
+        itensBasicosBeleza: boolean;
+        outrosBanheiro: string;
       };
-      salaEstar:{
+      salaEstar: {
         TV: boolean;
         internet: boolean;
-        sofa:boolean;
-        outrosSalaEstar:string;
+        sofa: boolean;
+        outrosSalaEstar: string;
       };
-      areaExterna:{
+      areaExterna: {
         garagem: boolean;
         piscina: boolean;
-        churasqueira:boolean;
+        churasqueira: boolean;
         quadra: boolean;
-        jogos:boolean;
+        jogos: boolean;
         restaurantes: boolean;
-        outrosareaExeterna:string;
+        outrosareaExeterna: string;
       };
       outrosServicosOferecidos: boolean;
       outrosServicosOferecidosDescrito: string;

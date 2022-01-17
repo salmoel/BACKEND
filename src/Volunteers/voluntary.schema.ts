@@ -42,8 +42,15 @@ export const VoluntarySchema = new mongoose.Schema({
   voluntarioProfissao: {
     especialidade: String,
     dicasEspecialidade: String,
-    servicoOferecido: String,
-    servicoOferecidoOutros: String,
+    servicoOferecido:{
+      servicoOferecidoAtendimentos:Boolean,
+      servicoOferecidoConsultorias:Boolean,
+      servicoOferecidoPalestras:Boolean,
+      servicoOferecidoGruposDeOrientacaoWhatsapp:Boolean,
+      servicoOferecidoEscreverConteudos:Boolean,
+      servicoOferecidoOutros: Boolean,
+      servicoOferecidoOutrosDescrito: String,
+      }
   },
   voluntarioIntercessor:{
     ministerioNaIgreja: String,
