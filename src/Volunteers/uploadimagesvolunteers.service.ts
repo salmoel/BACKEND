@@ -18,9 +18,9 @@ export class UploadImagesVolunteersService {
     urlImgsCasaDescanso: [],
   };
 
-  constructor(private readonly volunteersService: VolunteersService) { }
+  constructor(private readonly volunteersService: VolunteersService) {}
 
-  public async upload(files, id?) {
+  public async upload(files, requisitionType: string, id?: string) {
     let imgFilePrincipal: File = files.imgFilePrincipal;
     let imgFileCasaDescansoPrincipal: File = files.imgFileCasaDescansoPrincipal;
     let imgsCasaDescansoFile: File[] = files.imgsCasaDescansoFile;
@@ -42,9 +42,14 @@ export class UploadImagesVolunteersService {
       let item = imgFilePrincipal[0];
       this.urlsImage.urlImgPrincipal = getUrl(item.filename, pathFolder);
       uploadImag(item.path, item.filename, pathFolder);
+      console.log(":::::::::::: RECEBIDO DO BANCO DE DADOS 1", this.urlsImage.urlImgPrincipal)
+      console.log(":::::::::::: id ", id)
+
+
     } else {
-      let voluntario = await this.volunteersService.getById(id);
+      let voluntario:Voluntary = await this.volunteersService.getById(id); 
       this.urlsImage.urlImgPrincipal = voluntario.urlsImage.urlImgPrincipal;
+      console.log(":::::::::::: RECEBIDO DO BANCO DE DADOS 2 ", this.urlsImage.urlImgPrincipal)
     }
     if (imgFileCasaDescansoPrincipal) {
       console.log('Subindo a imgFileCasaDescansoPrincipal');
@@ -55,9 +60,14 @@ export class UploadImagesVolunteersService {
         pathFolder
       );
       uploadImag(item.path, item.filename, pathFolder);
-
     } else {
-      let voluntario = await this.volunteersService.getById(id);
+      let voluntario: Voluntary;
+      if (requisitionType == 'Put') {
+        console.log('é PUT ');
+        voluntario = await this.volunteersService.getById(id);
+      } else {
+        voluntario.urlsImage.urlImgCasaDescansoPrincipal = '';
+      }
       this.urlsImage.urlImgCasaDescansoPrincipal = voluntario.urlsImage.urlImgCasaDescansoPrincipal;
     }
 
@@ -69,11 +79,16 @@ export class UploadImagesVolunteersService {
         // this.urlsImage.urlImgsCasaDescanso[index] = getUrl(item.filename,pathFolder);
         varUlImgsCasaDescanso.push(getUrl(item.filename, pathFolder));
         uploadImag(item.path, item.filename, pathFolder);
-        // urlsImage.imgsCasaDescansoFile[index] = getUrlUploadImageIF(item); // função gera a url e faz upload da imagem
       });
       this.urlsImage.urlImgsCasaDescanso = varUlImgsCasaDescanso;
     } else {
-      let voluntario = await this.volunteersService.getById(id);
+      let voluntario:Voluntary;
+      if (requisitionType == 'Put') {
+        console.log('é PUT ');
+        voluntario = await this.volunteersService.getById(id);
+      } else {
+        voluntario.urlsImage.urlImgsCasaDescanso = [];
+      }
       this.urlsImage.urlImgsCasaDescanso = voluntario.urlsImage.urlImgsCasaDescanso;
     }
 

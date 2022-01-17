@@ -78,7 +78,7 @@ export class VolunteersController {
     let urlsImageLocal;
     // serviço que controla o upload das imagens para o imagekit
     // o trabalho dela é pegar os arquivos que vieram na requisição, fazer o upload e retornar as urls para montagem do novo objeto
-    urlsImageLocal = await this.uploadImagesVolunteersService.upload(files);
+urlsImageLocal = await this.uploadImagesVolunteersService.upload(files,"Post" );
 
      console.log("novo objeto criado com as urls das imagens UPLOIDADAS :: ", urlsImageLocal);
 
@@ -150,7 +150,7 @@ export class VolunteersController {
 
       urlsImageLocal = await this.uploadImagesVolunteersService.upload(
         // serviço que controla o upload das imagens para o imagekit  o trabalho dela é pegar os arquivos que vieram na requisição, fazer o upload e retornar as urls para montagem do novo objeto
-       files, id
+       files,"Put", id
         // this.urlsImage
       );
 
