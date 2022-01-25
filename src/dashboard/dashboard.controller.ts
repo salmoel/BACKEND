@@ -18,12 +18,12 @@ import { DashboardService } from './dashboard.service';
 export class DashboardController {
   constructor(private readonly dashboardService: DashboardService) { }
   //  consulta quantidade de usuários
-  @Get('/:typeUser')
+  @Get()
   async getLengthUser(@Param('typeUser') typeUser: string): Promise<Object> {
 
     let lengthAllUsers = {}
 
-    lengthAllUsers["voluntarios"] = await this.dashboardService.getAllVolunteers()
+    lengthAllUsers["voluntarios"] = await this.dashboardService.getAllVolunteers() 
 
     lengthAllUsers["administradores"] = await this.dashboardService.getAllAdministrators();
 
@@ -35,7 +35,7 @@ export class DashboardController {
 
   //  consulta aniversariantes
   @UseGuards(JwtAuthGuard)
-  @Get('birthday')
+  @Get('/birthday')
   async getConsulta(): Promise<Object> {
     console.log("chamou")
 

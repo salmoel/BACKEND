@@ -36,6 +36,16 @@ export function nameAdjustment(file): string {
     // console.log(`O Nome editado sem @ ${withoutarroba}`)
     nameEdited = withoutarroba;
   }
+  if (nameEdited.indexOf('(') > -1) {
+    const withLeftParentheses = nameEdited.replace(/@/g, '');
+    // console.log(`O Nome editado sem @ ${withoutarroba}`)
+    nameEdited = withLeftParentheses;
+  }
+  if (nameEdited.indexOf(')') > -1) {
+    const withRightParentheses = nameEdited.replace(/@/g, '');
+    // console.log(`O Nome editado sem @ ${withoutarroba}`)
+    nameEdited = withRightParentheses;
+  }
 
   if (nameEdited.indexOf('-') > -1) {
     const withoutdashes = nameEdited.replace(/-/g, '');
